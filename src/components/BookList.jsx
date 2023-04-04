@@ -27,7 +27,7 @@ const BookList = props => {
         </Col>
       </Row>
       <Row>
-        <Col md={6}>
+        <Col md={6} id="scroll">
           <Row className="gy-2 gx-2">
             {props.books
               .filter(b => b.title.toLowerCase().includes(searchQuery))
@@ -38,7 +38,7 @@ const BookList = props => {
               ))}
           </Row>
         </Col>
-        <Col md={6}>
+        <Col md={6} id="commenti">
           {selectedBook ? (
             <CommentArea asin={selectedBook} />
           ) : (

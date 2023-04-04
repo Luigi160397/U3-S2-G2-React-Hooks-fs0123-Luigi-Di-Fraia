@@ -45,3 +45,15 @@
   object-fit: cover;
   height: 200px;
 }
+
+#commenti {
+  align-self: self-start;
+  position: sticky;
+  top: 80px;
+  overflow: auto;
+}
+
+#scroll {
+  align-self: self-start;
+  overflow: auto;
+}
