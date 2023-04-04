@@ -1,14 +1,21 @@
 import { Navbar, Nav, Container } from "react-bootstrap";
+import logo from "../logo.png";
 
 const MyNav = () => (
-  <Navbar bg="dark" variant="dark">
+  <Navbar bg="light" expand="lg" className="shadow-sm sticky-top">
     <Container fluid>
-      <Navbar.Brand href="#home">EpiBooks</Navbar.Brand>
-      <Nav className="me-auto">
-        <Nav.Link href="#home">Shop</Nav.Link>
-        <Nav.Link href="#about">About</Nav.Link>
-        <Nav.Link href="#browse">Browse</Nav.Link>
-      </Nav>
+      <Navbar.Brand href="#home">
+        <img src={logo} alt="logo" width={40} height={40} className="me-1" />
+        EpiBooks
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="me-auto">
+          <Nav.Link href="#">Home</Nav.Link>
+          <Nav.Link href="#">About</Nav.Link>
+          <Nav.Link href="#">Browse</Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
     </Container>
   </Navbar>
 );
