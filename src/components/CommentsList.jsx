@@ -4,7 +4,7 @@ import SingleComment from "./SingleComment";
 const CommentsList = props => (
   <ListGroup>
     {props.comments.map(comment => (
-      <SingleComment key={comment._id} comment={comment} />
+      <SingleComment request={props.request} _id={comment._id} key={comment._id} comment={comment} />
     ))}
   </ListGroup>
 );
