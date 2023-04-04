@@ -23,7 +23,7 @@ const SingleComment = props => {
     }
   };
   return (
-    <ListGroup.Item key={props.comment._id} className="d-flex flex-wrap ">
+    <ListGroup.Item key={props.comment._id}>
       <Row className="d-flex justify-content-between align-items-center gy-2">
         <Col className="text-truncate" xs={12}>
           <strong>Autore:</strong> {props.comment.author}
