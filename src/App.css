@@ -40,3 +40,8 @@
     transform: rotate(360deg);
   }
 }
+
+.carta {
+  object-fit: cover;
+  height: 200px;
+}

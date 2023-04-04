@@ -28,7 +28,7 @@ const BookList = props => {
       </Row>
       <Row>
         <Col md={6}>
-          <Row>
+          <Row className="gy-2 gx-2">
             {props.books
               .filter(b => b.title.toLowerCase().includes(searchQuery))
               .map(b => (
