@@ -1,54 +1,66 @@
 import { Component } from "react";
-import { Col, Form, Row } from "react-bootstrap";
 import SingleBook from "./SingleBook";
+import { Alert, Col, Form, Row } from "react-bootstrap";
+import CommentArea from "./CommentArea";
 
 class BookList extends Component {
   state = {
-    stringa: ""
+    searchQuery: "",
+    selectedBook: ""
+  };
+
+  // questa funzione è passata a SingleBook come prop, cosicché la possa chiamare internamente al click della card, per salvare il riferimento ASIN della card cliccata
+  changeSelectedBook = asin => {
+    this.setState({
+      selectedBook: asin
+    });
   };
 
   render() {
     return (
       <>
-        <Form
-          id="cerca"
-          onSubmit={e => {
-            e.preventDefault();
-          }}
-        >
-          <Form.Group className="mb-3" controlId="search">
-            <Form.Control
-              type="text"
-              placeholder="Cerca nella sezione"
-              value={this.state.stringa}
-              onChange={e => {
-                this.setState({
-                  stringa: e.target.value
-                });
-              }}
-            />
-          </Form.Group>
-        </Form>
-        <Row style={{ overflow: "auto" }} className="pt-3 flex-nowrap">
-          {!this.state.stringa ? (
-            <>
-              {this.props.books.map(book => (
-                <Col key={book.asin} className="pb-3 px-2">
-                  <SingleBook asin={book.asin} img={book.img} title={book.title} price={book.price} />
-                </Col>
-              ))}
-            </>
-          ) : (
-            <>
+        <Row>
+          <Col>
+            {/* Input controllato, serve a salvare la stringa per la quale si filtrano i libri (vedi metodo filter() usato in basso) */}
+            <Form.Group className="mb-3">
+              <Form.Label className="display-6">Search a book</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Search here"
+                // leggo lo stato
+                value={this.state.searchQuery}
+                // setto lo stato ad ogni lettera inserita nell'input
+                onChange={e => this.setState({ searchQuery: e.target.value })}
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={6}>
+            <Row>
               {this.props.books
-                .filter(book => book.title.toLowerCase().includes(this.state.stringa.toLowerCase()))
-                .map(book => (
-                  <Col key={book.asin} className="pb-3 px-2">
-                    <SingleBook asin={book.asin} img={book.img} title={book.title} price={book.price} />
+                .filter(b => b.title.toLowerCase().includes(this.state.searchQuery)) // se searchQuery è "" il filter ritorna tutto l'array così com'è,
+                // se ha un valore !== "", il filter ritornerà solo gli elementi che includono i caratteri presenti nel this.state.searchQuery in quel momento
+                .map(b => (
+                  <Col xs={12} md={3} key={b.asin}>
+                    <SingleBook
+                      book={b} // b è l'oggetto libro vero e proprio passato come prop e accessibile all'interno di SingleBook come this.props.book
+                      selectedBook={this.state.selectedBook} // selectedBook è l'ASIN passato come prop che verrà usato per determinare quale card si colorerà il bordo di rosso
+                      changeSelectedBook={this.changeSelectedBook} // changeSelectedBook è la funzione chiamata all'onClick della Card interna a SingleBook
+                    />
                   </Col>
                 ))}
-            </>
-          )}
+            </Row>
+          </Col>
+          <Col md={6}>
+            {this.state.selectedBook ? (
+              // CommentArea sarà visibile solo dopo aver selezionato un libro, ovvero solo dopo che lo stato selectedBook cambia da "" all'ASIN di un libro
+              <CommentArea asin={this.state.selectedBook} />
+            ) : (
+              // nel frattempo si visualizza un alert
+              <Alert variant="info">Seleziona un libro per visualizzare i commenti</Alert>
+            )}
+          </Col>
         </Row>
       </>
     );

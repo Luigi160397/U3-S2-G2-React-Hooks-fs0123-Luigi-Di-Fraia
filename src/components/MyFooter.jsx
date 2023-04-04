@@ -1,13 +1,9 @@
-import { Container, Row, Col } from "react-bootstrap";
-
 const MyFooter = () => (
-  <Container fluid className="bg-light py-5">
-    <Row className="justify-content-center">
-      <Col>
-        <p>©EpiBooks - 2023</p>
-      </Col>
-    </Row>
-  </Container>
-);
+  <footer className="d-flex bg-dark">
+    <span className="text-white m-auto">
+      <strong>EPICODE</strong> - Copyright {new Date().getFullYear()}
+    </span>
+  </footer>
+)
 
-export default MyFooter;
+export default MyFooter

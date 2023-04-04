@@ -1,33 +1,36 @@
 import { Component } from "react";
 import { Card } from "react-bootstrap";
-import CommentArea from "./CommentArea";
+// import CommentArea from "./CommentArea";
 
 class SingleBook extends Component {
-  state = {
-    selected: false,
-    asin: ""
-  };
-
-  toggleBook = () => {
-    this.setState(prevState => ({
-      selected: !prevState.selected,
-      asin: !prevState.selected ? this.props.asin : ""
-    }));
-  };
+  // ** codice precedente alla nuova implementazione: **
+  // state = {
+  //   selected: false
+  // };
 
   render() {
-    const selectedStyle = {
-      border: this.state.selected ? "2px solid red" : "none"
-    };
     return (
-      <Card className="shadow libri" style={selectedStyle}>
-        <Card.Img onClick={this.toggleBook} variant="top" className="img-fluid" id="image-card" src={this.props.img} />
-        <Card.Body>
-          <Card.Title className="text-truncate">{this.props.title}</Card.Title>
-          <Card.Text>Prezzo: {this.props.price} €</Card.Text>
-          {this.state.selected && <CommentArea asin={this.props.asin} />}
-        </Card.Body>
-      </Card>
+      <>
+        <Card
+          // al click della card si chiama la funzione che cambierà lo stato al livello superiore (BookList) con il valore di ASIN del suo libro (this.props.book.asin)
+          onClick={() => this.props.changeSelectedBook(this.props.book.asin)}
+          // ** codice precedente alla nuova implementazione: **
+          // onClick={() => this.setState({ selected: !this.state.selected })}
+          // style={{ border: this.state.selected ? "3px solid red" : "none" }}
+
+          // se e solo se questa card ha lo stesso asin del selectedBook dello stato superiore (passato qui dentro come this.props.selectedBook)
+          // allora si colora il bordo di rosso, altrimenti sarà grigio
+          // in questo modo UNA SOLA card alla volta avrà il bordo rosso
+          style={{ border: this.props.selectedBook === this.props.book.asin ? "3px solid red" : "3px solid #ebebeb" }}
+        >
+          <Card.Img variant="top" src={this.props.book.img} />
+          <Card.Body>
+            <Card.Title style={{ color: "black" }}>{this.props.book.title}</Card.Title>
+          </Card.Body>
+        </Card>
+        {/*** codice precedente alla nuova implementazione: ***/}
+        {/* {this.state.selected && <CommentArea asin={this.props.book.asin} />} */}
+      </>
     );
   }
 }
