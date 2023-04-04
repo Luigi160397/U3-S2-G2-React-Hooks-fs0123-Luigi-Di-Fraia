@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import CommentsList from "./CommentsList";
 import AddComment from "./AddComment";
 import { useEffect, useState } from "react";
