@@ -65,7 +65,7 @@ const AddComment = props => {
         </Form.Select>
       </Form.Group>
 
-      <Button type="submit" variant="primary">
+      <Button type="submit" variant="warning">
         Invia commento
       </Button>
     </Form>

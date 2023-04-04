@@ -42,7 +42,7 @@ const BookList = props => {
           {selectedBook ? (
             <CommentArea asin={selectedBook} />
           ) : (
-            <Alert variant="info">Seleziona un libro per visualizzare i commenti</Alert>
+            <Alert variant="warning">Seleziona un libro per visualizzare i commenti</Alert>
           )}
         </Col>
       </Row>
