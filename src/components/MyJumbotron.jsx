@@ -1,8 +1,10 @@
+import { Container } from "react-bootstrap";
+
 const MyJumbotron = () => (
-  <div className="bg-info rounded px-4 py-5 my-2">
-    <h1 className="display-4 mb-0">Welcome to EpiBooks!</h1>
-    <p className="fs-4 lead">We list books</p>
-  </div>
+  <Container fluid className="bg-light shadow-sm" style={{ paddingBlock: "100px" }}>
+    <h1 className="display-2">Benvenuto su EpiBooks!</h1>
+    <p className="lead">La tua lettura a portata di click!</p>
+  </Container>
 );
 
 export default MyJumbotron;
